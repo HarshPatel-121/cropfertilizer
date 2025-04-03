@@ -53,29 +53,16 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				sidebar: {
-					DEFAULT: 'hsl(var(--sidebar-background))',
-					foreground: 'hsl(var(--sidebar-foreground))',
-					primary: 'hsl(var(--sidebar-primary))',
-					'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
-					accent: 'hsl(var(--sidebar-accent))',
-					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
-					border: 'hsl(var(--sidebar-border))',
-					ring: 'hsl(var(--sidebar-ring))'
+				dark: {
+					DEFAULT: '#1A1F2C',
+					foreground: '#ffffff',
+					card: '#222222',
+					border: '#333333',
 				},
-				// Custom colors for our app
-				forest: {
-					DEFAULT: '#2E7D32',
-					light: '#66BB6A',
-					dark: '#1B5E20',
-				},
-				soil: {
-					DEFAULT: '#8D6E63',
-					light: '#BCAAA4',
-				},
-				amber: {
-					DEFAULT: '#FFA000',
-					light: '#FFCA28',
+				green: {
+					500: '#22c55e',
+					600: '#16a34a',
+					700: '#15803d',
 				},
 			},
 			borderRadius: {
