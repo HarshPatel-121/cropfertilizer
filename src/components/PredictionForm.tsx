@@ -3,12 +3,12 @@ import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
 import { crops, getFertilizerRecommendation, type SoilType } from "@/utils/cropData";
 import CropInfoCard from "./CropInfoCard";
 import ResultDisplay from "./ResultDisplay";
+import { toast } from "@/hooks/use-toast";
 
 const PredictionForm: React.FC = () => {
   const [selectedCrop, setSelectedCrop] = useState("");
@@ -18,7 +18,14 @@ const PredictionForm: React.FC = () => {
   const [result, setResult] = useState<ReturnType<typeof getFertilizerRecommendation> | null>(null);
   
   const handlePredict = () => {
-    if (!selectedCrop) return;
+    if (!selectedCrop) {
+      toast({
+        title: "No crop selected",
+        description: "Please select a crop first to get fertilizer recommendations.",
+        variant: "destructive"
+      });
+      return;
+    }
     
     const prediction = getFertilizerRecommendation(
       selectedCrop,
@@ -28,6 +35,11 @@ const PredictionForm: React.FC = () => {
     );
     
     setResult(prediction);
+    
+    toast({
+      title: "Recommendation generated",
+      description: `Fertilizer recommendation for ${crops.find(c => c.id === selectedCrop)?.name} has been calculated.`,
+    });
   };
   
   const selectedCropName = crops.find(c => c.id === selectedCrop)?.name || "";
@@ -119,7 +131,8 @@ const PredictionForm: React.FC = () => {
                 </div>
                 
                 <Button 
-                  className="w-full bg-forest hover:bg-forest-dark"
+                  className="w-full"
+                  variant="default"
                   disabled={!selectedCrop}
                   onClick={handlePredict}
                 >
